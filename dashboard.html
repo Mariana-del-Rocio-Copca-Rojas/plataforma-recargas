@@ -1,0 +1,117 @@
+<!doctype html>
+<!--
+  dashboard.html — Dashboard: resumen del mes y tarjetas de campus
+  Lógica: js/pages/dashboard.js
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · EAV Recargas</title>
+  <!-- Librerías (locales, funcionan sin internet) -->
+  <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Estilos propios: tema → componentes -->
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Barra superior: la pinta js/ui/navbar.js -->
+  <div id="app-navbar"></div>
+
+  <main class="container-fluid px-3 px-md-4 py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center page-header mb-4">
+      <div>
+        <h1 class="h3 fw-bold mb-0">Dashboard</h1>
+        <p class="text-muted mb-0" id="mesActual"></p>
+      </div>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#campusModal">
+        <i class="bi bi-plus-lg me-1"></i>Nuevo campus
+      </button>
+    </div>
+
+    <!-- Indicadores del mes (los llena js/pages/dashboard.js) -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body d-flex align-items-center gap-3">
+          <span class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-sim"></i></span>
+          <div><div class="stat-value" id="statLineas">0</div><div class="text-muted small">Líneas registradas</div></div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body d-flex align-items-center gap-3">
+          <span class="stat-icon bg-success-subtle text-success"><i class="bi bi-check2-circle"></i></span>
+          <div><div class="stat-value" id="statRecargadas">0</div><div class="text-muted small">Líneas vigentes</div></div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body d-flex align-items-center gap-3">
+          <span class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-clock-history"></i></span>
+          <div><div class="stat-value" id="statPendientes">0</div><div class="text-muted small">Por recargar</div></div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body d-flex align-items-center gap-3">
+          <span class="stat-icon bg-info-subtle text-info"><i class="bi bi-cash-coin"></i></span>
+          <div><div class="stat-value" id="statMonto">$0</div><div class="text-muted small">Gastado este mes</div></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Tarjetas de campus: las pinta js/pages/dashboard.js -->
+    <h2 class="h5 fw-semibold mb-3">Campus</h2>
+    <div class="row g-3" id="campusGrid">
+      <div class="col-12 text-center py-5"><div class="spinner-border text-primary"></div></div>
+    </div>
+  </main>
+
+  <!-- Modal: nuevo campus -->
+  <div class="modal fade" id="campusModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" id="campusForm" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-building-add me-2"></i>Nuevo campus</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger py-2 small form-error d-none"></div>
+          <div class="mb-3">
+            <label class="form-label">Nombre del campus *</label>
+            <input class="form-control" name="nombre" required maxlength="80" placeholder="Ej. Campus Veracruz">
+          </div>
+          <div>
+            <label class="form-label">Dirección</label>
+            <input class="form-control" name="direccion" maxlength="150" placeholder="Opcional">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Scripts (el orden importa: cada capa usa las anteriores) ===== -->
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Configuración y núcleo -->
+  <script src="js/config.js"></script>
+  <script src="js/core/formato.js"></script>
+  <script src="js/core/fechas.js"></script>
+  <script src="js/core/session.js"></script>
+  <!-- Capa de datos -->
+  <script src="js/api/mock-store.js"></script>
+  <script src="js/api/mock-api.js"></script>
+  <script src="js/api/remote-api.js"></script>
+  <script src="js/api/api.js"></script>
+  <!-- Reglas de negocio -->
+  <script src="js/domain/lineas.js"></script>
+  <!-- Interfaz -->
+  <script src="js/ui/notificaciones.js"></script>
+  <script src="js/ui/formularios.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/badges.js"></script>
+  <!-- Página -->
+  <script src="js/pages/dashboard.js"></script>
+</body>
+</html>

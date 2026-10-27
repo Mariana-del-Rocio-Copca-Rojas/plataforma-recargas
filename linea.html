@@ -1,0 +1,132 @@
+<!doctype html>
+<!--
+  linea.html — Historial de recargas de una línea (linea.html?id=…)
+  Lógica: js/pages/linea.js
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Historial de recargas · EAV Recargas</title>
+  <!-- Librerías (locales, funcionan sin internet) -->
+  <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Estilos propios: tema → componentes -->
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Barra superior: la pinta js/ui/navbar.js -->
+  <div id="app-navbar"></div>
+
+  <main class="container-fluid px-3 px-md-4 py-4">
+    <!-- Migas de pan: Dashboard › Campus › Línea -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-2">
+        <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#" id="crumbCampus">Campus</a></li>
+        <li class="breadcrumb-item active" id="crumbLinea">Línea</li>
+      </ol>
+    </nav>
+
+    <!-- Encabezado: número, datos de la línea y acciones -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center page-header mb-4">
+      <div>
+        <h1 class="h3 fw-bold mb-0 phone" id="lineaNumero">Cargando…</h1>
+        <p class="text-muted mb-0" id="lineaInfo"></p>
+      </div>
+      <div class="d-flex gap-2" id="accionesLinea">
+        <button class="btn btn-outline-secondary" id="btnCsv"><i class="bi bi-download me-1"></i>Exportar CSV</button>
+        <button class="btn btn-success" id="btnRecargar"><i class="bi bi-lightning-charge me-1"></i>Registrar recarga</button>
+      </div>
+    </div>
+
+    <!-- Indicadores de la línea (los llena js/pages/linea.js) -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body">
+          <div class="text-muted small">Estado</div><div class="mt-1" id="statEstado">—</div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body">
+          <div class="text-muted small">Última recarga</div><div class="stat-value fs-5 mt-1" id="statUltima">—</div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body">
+          <div class="text-muted small">Total invertido</div><div class="stat-value mt-1" id="statMonto">$0</div>
+        </div></div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card stat-card h-100"><div class="card-body">
+          <div class="text-muted small">Facturas pendientes</div><div class="stat-value mt-1" id="statFacturas">0</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Historial de recargas con filtros -->
+    <div class="card">
+      <div class="card-header bg-white border-0 pt-3 d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div>
+          <h2 class="h6 fw-semibold mb-0">Historial de recargas</h2>
+          <small class="text-muted" id="contador">0 registros</small>
+        </div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <select class="form-select form-select-sm w-auto" id="filtroFactura">
+            <option value="">Toda facturación</option>
+            <!-- Las demás opciones salen de CATALOGOS.FACTURACION (js/config.js) -->
+          </select>
+          <input type="month" class="form-control form-control-sm w-auto" id="filtroMes" title="Filtrar por mes">
+          <button class="btn btn-sm btn-light" id="limpiarFiltros" title="Quitar filtros"><i class="bi bi-x-lg"></i></button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 tabla-historial">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th class="text-end">Monto</th>
+              <th>Vigencia</th>
+              <th>Paquete / tipo</th>
+              <th>Medio de pago</th>
+              <th>Folio / referencia</th>
+              <th>Solicitó</th>
+              <th>Realizó</th>
+              <th>Facturación</th>
+              <th>Observaciones</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaRecargas">
+            <tr><td colspan="11" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== Scripts (el orden importa: cada capa usa las anteriores) ===== -->
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Configuración y núcleo -->
+  <script src="js/config.js"></script>
+  <script src="js/core/formato.js"></script>
+  <script src="js/core/fechas.js"></script>
+  <script src="js/core/session.js"></script>
+  <!-- Capa de datos -->
+  <script src="js/api/mock-store.js"></script>
+  <script src="js/api/mock-api.js"></script>
+  <script src="js/api/remote-api.js"></script>
+  <script src="js/api/api.js"></script>
+  <!-- Reglas de negocio -->
+  <script src="js/domain/lineas.js"></script>
+  <!-- Interfaz -->
+  <script src="js/ui/notificaciones.js"></script>
+  <script src="js/ui/formularios.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/badges.js"></script>
+  <script src="js/ui/recarga-modal.js"></script>
+  <!-- Página -->
+  <script src="js/pages/linea.js"></script>
+</body>
+</html>

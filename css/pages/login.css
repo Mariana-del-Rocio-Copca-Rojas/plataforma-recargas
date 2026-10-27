@@ -1,0 +1,43 @@
+/* =========================================================
+   pages/login.css — Pantalla de inicio de sesión (index.html)
+   ========================================================= */
+
+/* Fondo "cielo nocturno" con la tarjeta centrada */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, .14) 0, transparent 40%),
+    linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 45%, var(--blue) 100%);
+}
+
+/* Tarjeta del formulario, con franja dorada arriba */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border: 0;
+  border-top: 4px solid var(--gold);
+  border-radius: 1rem;
+}
+
+/* Ícono de avión inclinado, como en despegue */
+.login-icon {
+  width: 64px; height: 64px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(36, 91, 130, .1);
+  color: var(--blue);
+  font-size: 1.8rem;
+  transform: rotate(-30deg);
+}
+
+/* Siglas grandes "EAV" */
+.login-brand { font-size: 2rem; font-weight: 800; letter-spacing: .12em; color: var(--navy); line-height: 1; }
+
+/* Pie con enlace al sitio oficial */
+.login-footer { color: rgba(255, 255, 255, .75); font-size: .85rem; text-align: center; margin: 0; }
+.login-footer a { color: var(--gold); text-decoration: none; }

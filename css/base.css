@@ -1,0 +1,46 @@
+/* =========================================================
+   base.css — Tema visual de EAV
+   ---------------------------------------------------------
+   Colores institucionales, tipografía y ajustes de los
+   colores de Bootstrap. Para cambiar la paleta de toda la
+   plataforma basta con editar las variables de :root.
+   ========================================================= */
+
+/* ---------- Paleta institucional ---------- */
+:root {
+  --navy: #17324d;        /* azul marino: barra superior, títulos */
+  --blue: #245b82;        /* azul principal: botones y enlaces */
+  --gold: #f2b134;        /* dorado: acentos de marca EAV */
+  --navy-deep: #0d1f33;   /* azul nocturno: fondo del login */
+
+  /* Variables de Bootstrap que se reemplazan por la paleta EAV */
+  --bs-primary: #245b82;
+  --bs-primary-rgb: 36, 91, 130;
+  --bs-body-bg: #f4f6fa;
+}
+
+/* ---------- Página ---------- */
+body {
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #263746;
+}
+
+/* ---------- Colores "primary" de Bootstrap ---------- */
+.btn-primary {
+  --bs-btn-bg: var(--blue);
+  --bs-btn-border-color: var(--blue);
+  --bs-btn-hover-bg: var(--navy);
+  --bs-btn-hover-border-color: var(--navy);
+  --bs-btn-active-bg: var(--navy);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--blue);
+  --bs-btn-border-color: var(--blue);
+  --bs-btn-hover-bg: var(--blue);
+  --bs-btn-hover-border-color: var(--blue);
+}
+.text-primary { color: var(--blue) !important; }
+
+/* La barra superior (y cualquier .bg-primary) usa un degradado azul */
+.navbar.bg-primary, .bg-primary { background: linear-gradient(120deg, var(--navy), var(--blue)) !important; }

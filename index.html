@@ -1,0 +1,86 @@
+<!doctype html>
+<!--
+  index.html — Inicio de sesión
+  Lógica: js/pages/login.js · Estilos propios: css/pages/login.css
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión · EAV Recargas</title>
+  <!-- Librerías (locales, funcionan sin internet) -->
+  <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Estilos propios: tema → componentes → página -->
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/components.css" rel="stylesheet">
+  <link href="css/pages/login.css" rel="stylesheet">
+</head>
+<body class="login-page">
+
+  <!-- Tarjeta de inicio de sesión -->
+  <div class="card login-card shadow-lg">
+    <div class="card-body p-4 p-sm-5">
+      <!-- Marca EAV -->
+      <div class="text-center mb-4">
+        <span class="login-icon mb-3"><i class="bi bi-airplane-fill"></i></span>
+        <div class="login-brand">EAV</div>
+        <p class="text-muted small mb-3">Estudios Aeronáuticos de Veracruz · Centro Universitario</p>
+        <h1 class="h5 fw-bold mb-1">Control de Recargas</h1>
+        <p class="text-muted small mb-0">Líneas telefónicas por campus</p>
+      </div>
+
+      <!-- Formulario: correo + contraseña -->
+      <form id="loginForm" novalidate>
+        <div class="alert alert-danger py-2 small form-error d-none"></div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="usuario@eav.edu.mx" required autofocus>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePass" title="Mostrar contraseña">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-2" id="btnLogin">
+          <span class="spinner-border spinner-border-sm me-2 d-none"></span>Iniciar sesión
+        </button>
+      </form>
+
+      <!-- Usuario de prueba (se oculta solo cuando se conecta el backend real) -->
+      <p class="text-center text-muted small mt-4 mb-0" id="demoHint">
+        Demo: <code>admin@demo.com</code> / <code>admin123</code>
+      </p>
+    </div>
+  </div>
+
+  <p class="login-footer">Formando a los profesionales de la aviación · <a href="https://www.eav.edu.mx/" target="_blank" rel="noopener">eav.edu.mx</a></p>
+
+  <!-- ===== Scripts (el orden importa: cada capa usa las anteriores) ===== -->
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Configuración y núcleo -->
+  <script src="js/config.js"></script>
+  <script src="js/core/formato.js"></script>
+  <script src="js/core/session.js"></script>
+  <!-- Capa de datos -->
+  <script src="js/api/mock-store.js"></script>
+  <script src="js/api/mock-api.js"></script>
+  <script src="js/api/remote-api.js"></script>
+  <script src="js/api/api.js"></script>
+  <!-- Interfaz -->
+  <script src="js/ui/formularios.js"></script>
+  <!-- Página -->
+  <script src="js/pages/login.js"></script>
+</body>
+</html>

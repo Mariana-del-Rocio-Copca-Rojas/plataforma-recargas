@@ -1,0 +1,78 @@
+/* =========================================================
+   components.css — Componentes reutilizables
+   ---------------------------------------------------------
+   Estilos que comparten varias páginas: logo, tarjetas,
+   indicadores, tablas, formularios y estados vacíos.
+   ========================================================= */
+
+/* ---------- Logo "EAV" de la barra superior ---------- */
+.brand-badge {
+  display: inline-grid; place-items: center;
+  padding: 2px 8px; border-radius: 6px;
+  background: var(--gold); color: var(--navy);
+  font-weight: 800; letter-spacing: .06em; font-size: .9rem;
+}
+
+/* ---------- Tarjetas ---------- */
+.card { border: 0; border-radius: .75rem; box-shadow: 0 1px 3px rgba(16, 24, 40, .08); }
+
+/* Indicadores del dashboard y del historial (ícono + número) */
+.stat-card .stat-icon {
+  width: 48px; height: 48px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: .75rem;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.stat-card .stat-value { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+
+/* Tarjeta de cada campus en el dashboard */
+.campus-card { transition: transform .15s, box-shadow .15s; }
+.campus-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(16, 24, 40, .12); }
+.campus-card .campus-icon {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: .6rem;
+  background: rgba(242, 177, 52, .18);
+  color: #a86f00;
+  font-size: 1.3rem;
+}
+
+/* ---------- Tablas ---------- */
+.table > :not(caption) > * > * { padding: .75rem .9rem; }
+.table thead th {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: #6c757d;
+  font-weight: 600;
+  background: #f8f9fb;
+}
+/* Números telefónicos en fuente monoespaciada (dígitos alineados) */
+.phone { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; }
+
+/* Historial de recargas: muchas columnas, se desplaza horizontalmente */
+.tabla-historial { min-width: 1100px; font-size: .9rem; }
+.tabla-historial .obs { max-width: 220px; white-space: normal; }
+
+/* ---------- Mensaje cuando una lista está vacía ---------- */
+.empty-state { padding: 3rem 1rem; text-align: center; color: #6c757d; }
+.empty-state i { font-size: 2.5rem; display: block; margin-bottom: .5rem; }
+
+/* ---------- Encabezado de página (título + botón) ---------- */
+.page-header { gap: .75rem; }
+
+/* ---------- Formularios ---------- */
+/* Título numerado de cada sección de un formulario ("1 Datos de la línea") */
+.section-heading {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 14px; color: var(--navy); font-size: 1rem; font-weight: 700;
+}
+.section-heading .number {
+  display: inline-grid; place-items: center;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: #e8f1f8; color: var(--blue); font-size: .9rem;
+}
+.form-label { font-size: .88rem; font-weight: 600; color: #33495d; }
+.required { color: #b42318; }   /* asterisco de campo obligatorio */
+.form-control:focus, .form-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(36, 91, 130, .12); }
